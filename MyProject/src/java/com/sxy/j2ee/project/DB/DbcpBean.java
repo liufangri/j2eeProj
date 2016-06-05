@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
+ * 控制数据库连接池的类
  *
  * @author Y400
  */
@@ -26,8 +27,14 @@ public class DbcpBean {
 	    super(message);
 	}
     }
+    /**
+     * 数据库连接池实例
+     */
     private DataSource DS;
 
+    /**
+     * 一些供初始化的参数名，初始化参数需要在DbcpProperties.properties里修改
+     */
     private String url;
     private String userName;
     private String password;
@@ -44,6 +51,11 @@ public class DbcpBean {
 	initDS();
     }
 
+    /**
+     * 获取在写在配置文件里的参数
+     *
+     * @return DbcpBean
+     */
     public DbcpBean getProperties() {
 	try {
 	    prop = new Properties();
@@ -64,10 +76,20 @@ public class DbcpBean {
 	return this;
     }
 
+    /**
+     * 获取数据库连接池实例
+     *
+     * @return DataSource
+     */
     public DataSource getDataSource() {
 	return DS;
     }
 
+    /**
+     * 获得一个数据库连接
+     *
+     * @return Connection
+     */
     public Connection getConnection() {
 	Connection connection = null;
 	if (DS != null) {
@@ -85,6 +107,9 @@ public class DbcpBean {
 	return connection;
     }
 
+    /**
+     * 关闭连接池里的所有连接（并没有销毁数据库连接池实例）
+     */
     public void shutDownDataSource() {
 	try {
 	    ((BasicDataSource) DS).close();
@@ -93,6 +118,11 @@ public class DbcpBean {
 	}
     }
 
+    /**
+     * 初始化数据库连接池
+     *
+     * @return DbcpBean
+     */
     public DbcpBean initDS() {
 	if (DS == null) {
 	    getProperties().initDS(url, userName, password, driverClass, initialSize, maxTotal, maxIdle, maxWaitMillis, minIdle);
@@ -104,6 +134,7 @@ public class DbcpBean {
     }
 
     /**
+     * 使用参数初始化数据库连接池
      *
      * @param Url
      * @param userName

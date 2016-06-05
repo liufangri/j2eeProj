@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * 用户的数据库操作对象
  *
  * @author Y400
  */
@@ -25,6 +26,12 @@ public class UserDaoImpl implements UserDao {
 	super();
     }
 
+    /**
+     * 向数据库添加一条用户记录，成功则返回true
+     *
+     * @param user
+     * @return
+     */
     @Override
     public boolean insert(User user) {
 	Connection connection = dbcpBean.getConnection();
@@ -51,21 +58,45 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    /**
+     * 更新用户，成功则返回ture
+     *
+     * @param user
+     * @return
+     */
     @Override
     public boolean update(User user) {
 	return true;
     }
 
+    /**
+     * 删除一个用户，成功则返回ture
+     *
+     * @param user
+     * @return
+     */
     @Override
     public boolean delete(User user) {
 	return true;
     }
 
+    /**
+     * 删除一个用户，成功则返回true
+     *
+     * @param id
+     * @return
+     */
     @Override
     public boolean delete(long id) {
 	return true;
     }
 
+    /**
+     * 通过用户名查找用户
+     *
+     * @param name
+     * @return
+     */
     @Override
     public User findByName(String name) {
 	User user = null;
@@ -96,6 +127,12 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    /**
+     * 通过邮箱查找用户
+     *
+     * @param email
+     * @return
+     */
     @Override
     public User findByEmail(String email) {
 	User user = null;
@@ -129,6 +166,12 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    /**
+     * 通过邮箱查找用户密码
+     *
+     * @param email
+     * @return
+     */
     @Override
     public String getPasswordByEmail(String email) {
 	String pwMd5 = null;

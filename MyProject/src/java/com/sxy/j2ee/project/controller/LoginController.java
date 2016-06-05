@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * 涉及login操作的控制类
  *
  * @author Y400
  */
@@ -29,12 +30,13 @@ public class LoginController {
 	this.userDaoImpl = userDaoImpl;
     }
 
-    @RequestMapping(value = {"/login"})
-    public ModelAndView login() {
-	ModelAndView mav = new ModelAndView("login", "user", new User());
-	return mav;
-    }
-
+    /**
+     * 响应loginAction.htm的请求 如果登录成功，返回主页，如果登录失败，返回登录页
+     *
+     * @param session
+     * @param user
+     * @return
+     */
     @RequestMapping(value = {"/loginAction"})
     public ModelAndView loginAction(HttpSession session, User user) {
 	ModelAndView mav = new ModelAndView();
@@ -72,6 +74,12 @@ public class LoginController {
 
     }
 
+    /**
+     * 响应logout.htm的请求，设置登录状态并返回主页
+     *
+     * @param session
+     * @return
+     */
     @RequestMapping(value = {"/logout"})
     public ModelAndView logout(HttpSession session) {
 	session.setAttribute("login_state", false);

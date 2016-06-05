@@ -19,15 +19,13 @@
         <div class="container">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="#">View</a></p>
-                            </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="caption">
+                            <h3>${book.title}</h3>
+                            <h4>${book.id}</h4>
+                            <p>${book.summary}</p>
                         </div>
+
                     </div>
                 </div>
             </div>

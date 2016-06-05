@@ -6,6 +6,7 @@
 package com.sxy.j2ee.project.controller;
 
 import com.sxy.j2ee.project.model.Book;
+import com.sxy.j2ee.project.model.User;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ViewDirectController {
 
+    private final String[] genders = {"男", "女", "保密"};
+
+    /**
+     * 处理首页请求
+     *
+     * @return
+     */
     @RequestMapping(value = "/index")
     public ModelAndView index() {
 	ModelAndView mav = new ModelAndView("index");
@@ -31,10 +39,15 @@ public class ViewDirectController {
 	return mav;
     }
 
+    /**
+     * 处理对book.htm的请求，bookId是传入的参数
+     *
+     * @param bookId
+     * @return
+     */
     @RequestMapping(value = "/book")
-    public ModelAndView book(HttpServletRequest request) {
+    public ModelAndView book(String bookId) {
 	ModelAndView mav = new ModelAndView();
-	String bookId = (String) request.getParameter("bookId");
 	Book book = new Book();
 	book.setId(bookId);
 	book.setTitle("冰与火之歌");
@@ -44,4 +57,29 @@ public class ViewDirectController {
 	return mav;
     }
 
+    /**
+     * 响应login.htm的请求 返回login页面和参数user
+     *
+     * @return
+     */
+    @RequestMapping(value = {"/login"})
+    public ModelAndView login() {
+	ModelAndView mav = new ModelAndView("login", "user", new User());
+	return mav;
+    }
+
+    /**
+     * 响应register.htm的请求，返回register.jsp
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/register")
+    public ModelAndView register(HttpServletRequest request) {
+	ModelAndView mav;
+	mav = new ModelAndView("register", "user", new User());
+	mav.addObject("genders", genders);
+	return mav;
+
+    }
 }

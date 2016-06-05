@@ -11,14 +11,12 @@ import com.sxy.j2ee.project.security.Md5;
 import com.sxy.j2ee.project.util.MyModelAndView;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * 对注册相关操作的控制类
  *
  * @author Y400
  */
@@ -34,38 +32,12 @@ public class RegisterController {
     private final String error_pNum = "error_pNum";
     private final String error = "has-error";
 
-    @RequestMapping(value = "/register")
-    public ModelAndView register(HttpServletRequest request) {
-	ModelAndView mav;
-	mav = new ModelAndView("register", "user", new User());
-	mav.addObject("genders", genders);
-	return mav;
-
-    }
-
-    public ModelAndView registerAction(User user) {
-	ModelAndView mav = new ModelAndView();
-
-	if (null == user.getPassword() || "".equals(user.getPassword())) {
-	    mav.setViewName("test");
-	    return mav;
-	}
-	if (!user.getPassword().equals(user.getPassword_re())) {
-
-	    mav.addObject("genders", genders);
-	    mav.setViewName("register");
-
-	    Map<String, String> results = new HashMap<String, String>();
-	    results.put("error_name", error_name);
-	} else {
-	    String pw = Md5.Md5_16(user.getPassword());
-	    user.setPwMd5(pw);
-	    mav.setViewName("test");
-	    mav.addObject("result", user);
-	}
-	return mav;
-    }
-
+    /**
+     * 1，输入验证；2，处理注册
+     *
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/registerAction")
     public ModelAndView validation(User user) {
 	MyModelAndView mav = new MyModelAndView();

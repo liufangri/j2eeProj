@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * 评论的数据库操作对象
  *
  * @author Y400
  */
@@ -23,6 +24,12 @@ public class CommentDaoImpl implements CommentDao {
 
     private DbcpBean dbcpBean = null;
 
+    /**
+     * 向数据库添加一条评论记录
+     *
+     * @param comment
+     * @return
+     */
     @Override
     public boolean insert(Comment comment) {
 	Connection connection = dbcpBean.getConnection();
@@ -46,6 +53,12 @@ public class CommentDaoImpl implements CommentDao {
 
     }
 
+    /**
+     * 通过书籍Id获得这本书的评论
+     *
+     * @param bookId
+     * @return
+     */
     @Override
     public List<Comment> getCommentsByBookId(String bookId) {
 	List<Comment> comments = new ArrayList<Comment>();
@@ -71,6 +84,12 @@ public class CommentDaoImpl implements CommentDao {
 	return comments;
     }
 
+    /**
+     * 根据评论id删除评论
+     *
+     * @param id
+     * @return
+     */
     @Override
     public boolean delete(String id) {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * 书籍的数据库操作对象
  *
  * @author Y400
  */
