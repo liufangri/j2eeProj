@@ -18,64 +18,15 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <a href="#"><img src="<%=path%>/dist/img/bookcovers/s26936721.jpg" alt="..."/></a>
+                            <a href="#"><img src="<%=path%>/dist/img/bookcovers/631BCEF55B51E2B6.jpg" alt="{}"/></a>
                             <div class="caption">
                                 <h3>${book.title}</h3>
                                 <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
+                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=631BCEF55B51E2B6">View</a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div> 
+
                 </div>
             </div>
 

@@ -81,7 +81,22 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public boolean insert(Book book) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	Connection connection = dbcpBean.getConnection();
+	String sql = "insert into book (id,title, author,summary) values(?,?,?,?)";
+	try {
+	    PreparedStatement ps = connection.prepareStatement(sql);
+	    ps.setString(1, book.getId());
+	    ps.setString(2, book.getTitle());
+	    ps.setString(3, book.getAuthor());
+	    ps.setString(4, book.getSummary());
+	    ps.executeUpdate();
+	    return true;
+	} catch (SQLException ex) {
+	    Logger.getLogger(BookDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+	    return false;
+	} finally {
+	    dbcpBean.shutDownDataSource();
+	}
     }
 
     @Override

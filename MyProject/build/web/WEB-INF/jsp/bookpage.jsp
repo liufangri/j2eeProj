@@ -12,6 +12,7 @@
         <title>${book.title}</title>
         <%
             boolean loginState = (Boolean) session.getAttribute("login_state");
+            String path = request.getContextPath();
         %>
     </head>
     <body>
@@ -20,12 +21,17 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
-                        <div class="caption">
-                            <h3>${book.title}</h3>
-                            <h4>${book.id}</h4>
-                            <p>${book.summary}</p>
+                        <div class="row">
+                            <div class="caption">
+                                <h3>《${book.title}》</h3>
+                                <h5 style="align-right:true">${book.author}</h5>
+                                <p>${book.summary}</p>
+                            </div>
                         </div>
 
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" alt="..."/>
                     </div>
                 </div>
             </div>
