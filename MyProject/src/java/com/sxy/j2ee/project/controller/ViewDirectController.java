@@ -48,11 +48,12 @@ public class ViewDirectController {
     @RequestMapping(value = "/book")
     public ModelAndView book(String bookId) {
 	ModelAndView mav = new ModelAndView();
-	Book book = new Book();
-	book.setId(bookId);
-	book.setTitle("冰与火之歌");
-	book.setSummary("《冰与火之歌》主要描述了在一片虚构的中世纪世界里所发生的一系列宫廷斗争、疆场厮杀、游历冒险和魔法抗衡的故事。在内容及风格上，《冰与火之歌》是现实生活的一面镜子，人性真实的写照。写作手法上马丁运用了POV（Point-of-View，即“视点人物写作手法”），以轮流交换人物第三人称视点的叙事方式进行描写，从而推动故事的进展。");
+	Book book =new Book();
+        book.setTitle("123123");
+        book.setAuthor("asdasd");
+        book.setSummary("qwe");
 	mav.addObject("book", book);
+//	mav.addObject("comments", comments);
 	mav.setViewName("bookpage");
 	return mav;
     }

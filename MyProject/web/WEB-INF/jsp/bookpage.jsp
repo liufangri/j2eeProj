@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="mvc" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +30,14 @@
                     </div>
                 </div>
             </div>
-
+            <mvc:form action="submit.htm" modelAtrribute="comment" method="post">
+                <div class="span3">
+                    <input type="text" value="" placeholder="Inactive" class="span3">
+                </div>
+                <div style="margin-top: 20px;margin-bottom: 20px">
+                    <button type="submit" class="btn btn-primary">评论</button>
+                </div>
+            </mvc:form>
+        </div>
     </body>
 </html>
