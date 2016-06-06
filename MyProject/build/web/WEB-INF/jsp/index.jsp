@@ -26,7 +26,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <a href="#"><img src="<%=path%>/dist/img/bookcovers/3FD33040AEB091BE.jpg" alt="{}"/></a>
+                            <div class="caption">
+                                <h3>${book.title}</h3>
+                                <p>${book.summary}</p>
+                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=3FD33040AEB091BE">View</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

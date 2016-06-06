@@ -4,7 +4,9 @@
     Author     : Y400
 --%>
 
+<%@page import="com.sxy.j2ee.project.model.Book"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="mvc" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +15,9 @@
         <%
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
+            Book book = (Book) request.getAttribute("book");
+            request.setAttribute("book", book);
+            session.setAttribute("bookId", book.getId());
         %>
     </head>
     <body>
@@ -34,6 +39,20 @@
                         <img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" alt="..."/>
                     </div>
                 </div>
+                <%
+                    if (loginState) {
+                %>
+                <mvc:form action="submitComment.htm" method="post" cssClass="form" modelAttribute="comment">
+                    <div class="form-group">
+                        <textarea type="textarea" name="content" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">comment</button>
+                </mvc:form>
+                <%
+                } else {
+                %>
+                <a href="login.htm">登录后进行评论</a>
+                <%}%>
             </div>
 
     </body>

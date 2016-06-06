@@ -5,10 +5,11 @@
  */
 package com.sxy.j2ee.project.controller;
 
-import com.sxy.j2ee.project.model.User;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -17,9 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CommentController {
 
-    @RequestMapping(value = "/submit")
-    public ModelAndView submitComment(User user, String comment) {
-	ModelAndView mav = new ModelAndView(comment);
-	return mav;
+    @RequestMapping(value = "/submitComment")
+    public View submitComment(HttpSession session) {
+	return new RedirectView("book.htm?bookId=" + (String) session.getAttribute("bookId"));
     }
 }

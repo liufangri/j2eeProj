@@ -14,7 +14,6 @@
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/src/java/com/sxy/j2ee/project/DB/DbcpBean.java</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/src/java/com/sxy/j2ee/project/DB/DbcpProperties.properties</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/web/WEB-INF/applicationContext.xml</file>
-            <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/web/WEB-INF/jsp/addBook.jsp</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/src/java/com/sxy/j2ee/project/model/Comment.java</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/web/WEB-INF/jsp/header.jsp</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/web/WEB-INF/jsp/staticbar.jsp</file>
@@ -30,7 +29,6 @@
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/src/java/com/sxy/j2ee/project/model/UserDaoImpl.java</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/src/java/com/sxy/j2ee/project/util/MyModelAndView.java</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/web/WEB-INF/jsp/error.jsp</file>
-            <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/web/WEB-INF/jsp/hello.jsp</file>
             <file>file:/D:/JavaWebProjects/j2eeProj/MyProject/src/java/com/sxy/j2ee/project/model/Book.java</file>
         </group>
     </open-files>

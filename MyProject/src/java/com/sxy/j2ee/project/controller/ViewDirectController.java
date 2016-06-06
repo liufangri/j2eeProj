@@ -55,12 +55,14 @@ public class ViewDirectController {
      * @return
      */
     @RequestMapping(value = "/book")
-    public ModelAndView book(String bookId) {
+    public ModelAndView book(String bookId, HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
 	Book book = bdi.findBookById(bookId);
 	List<Comment> comments = cdi.getCommentsByBookId(bookId);
 	mav.addObject("book", book);
 	mav.addObject("comments", comments);
+	mav.addObject("test", new Integer(123));
+	mav.addObject("comment", new Comment());
 	mav.setViewName("bookpage");
 	return mav;
     }
@@ -72,7 +74,8 @@ public class ViewDirectController {
      */
     @RequestMapping(value = {"/login"})
     public ModelAndView login() {
-	ModelAndView mav = new ModelAndView("login", "user", new User());
+	ModelAndView mav = new ModelAndView("login");
+	mav.addObject("user", new User());
 	return mav;
     }
 
