@@ -11,7 +11,7 @@ import com.sxy.j2ee.project.model.Comment;
 import com.sxy.j2ee.project.model.CommentDaoImpl;
 import com.sxy.j2ee.project.model.User;
 import com.sxy.j2ee.project.security.Md5;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,10 +58,9 @@ public class ViewDirectController {
     public ModelAndView book(String bookId, HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
 	Book book = bdi.findBookById(bookId);
-	List<Comment> comments = cdi.getCommentsByBookId(bookId);
+	ArrayList<Comment> comments = cdi.getCommentsByBookId(bookId);
 	mav.addObject("book", book);
-	mav.addObject("comments", comments);
-	mav.addObject("test", new Integer(123));
+	request.setAttribute("comments", comments);
 	mav.addObject("comment", new Comment());
 	mav.setViewName("bookpage");
 	return mav;

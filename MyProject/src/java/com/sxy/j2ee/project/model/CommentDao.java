@@ -5,7 +5,7 @@
  */
 package com.sxy.j2ee.project.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +15,7 @@ public interface CommentDao {
 
     public boolean insert(Comment comment);
 
-    public List<Comment> getCommentsByBookId(String bookId);
+    public ArrayList<Comment> getCommentsByBookId(String bookId);
 
     public boolean delete(String id);
 }

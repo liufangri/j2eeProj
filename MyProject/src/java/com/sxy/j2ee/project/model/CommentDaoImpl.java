@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,10 +59,10 @@ public class CommentDaoImpl implements CommentDao {
      * @return
      */
     @Override
-    public List<Comment> getCommentsByBookId(String bookId) {
-	List<Comment> comments = new ArrayList<Comment>();
+    public ArrayList<Comment> getCommentsByBookId(String bookId) {
+	ArrayList<Comment> comments = new ArrayList<Comment>();
 	Connection connection = dbcpBean.getConnection();
-	String sql = "select * from comment where bookId = ?";
+	String sql = "select * from comment where bookId = ? order by time desc";
 	PreparedStatement ps;
 	try {
 	    ps = connection.prepareStatement(sql);
