@@ -17,65 +17,25 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <a href="#"><img src="<%=path%>/dist/img/bookcovers/s26936721.jpg" alt="..."/></a>
+                        <div class="thumbnail" style="min-height: 340px">
+                            <a href="#"><img src="<%=path%>/dist/img/bookcovers/631BCEF55B51E2B6.jpg" alt="{}" width="150px" height="300px"/></a>
                             <div class="caption">
                                 <h3>${book.title}</h3>
                                 <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
+                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=631BCEF55B51E2B6">View</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
+                        <div class="thumbnail" style="min-height: 300px">
+                            <a href="#" style=""><img src="<%=path%>/dist/img/bookcovers/3FD33040AEB091BE.jpg" alt="{}" height="100%"/></a>
+                            <div class="caption" >
                                 <h3>${book.title}</h3>
                                 <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
+                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=3FD33040AEB091BE">View</a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                            <img data-src="holder.js/100%x200" alt="...">
-                            <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=123def">View</a></p>
-                            </div>
-                        </div>
-                    </div> 
                 </div>
             </div>
 

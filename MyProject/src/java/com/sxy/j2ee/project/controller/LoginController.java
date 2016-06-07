@@ -8,6 +8,7 @@ package com.sxy.j2ee.project.controller;
 import com.sxy.j2ee.project.model.User;
 import com.sxy.j2ee.project.model.UserDaoImpl;
 import com.sxy.j2ee.project.security.Md5;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = {"/loginAction"})
-    public ModelAndView loginAction(HttpSession session, User user) {
+    public ModelAndView loginAction(HttpSession session, User user, HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
 	String email = user.getEmail();
 	if (email == null || email == "") {
@@ -62,6 +63,7 @@ public class LoginController {
 		mav.addObject("password_has_error", error);
 	    } else {
 		//密码验证成功
+		request.getRequestURI();
 		mav.setViewName("index");
 		session.setAttribute("user", queryUser);
 		session.setAttribute("login_state", true);

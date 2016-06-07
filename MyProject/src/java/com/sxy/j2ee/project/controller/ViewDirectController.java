@@ -6,7 +6,12 @@
 package com.sxy.j2ee.project.controller;
 
 import com.sxy.j2ee.project.model.Book;
+import com.sxy.j2ee.project.model.BookDaoImpl;
+import com.sxy.j2ee.project.model.Comment;
+import com.sxy.j2ee.project.model.CommentDaoImpl;
 import com.sxy.j2ee.project.model.User;
+import com.sxy.j2ee.project.security.Md5;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ViewDirectController {
 
+    private CommentDaoImpl cdi;
+    private BookDaoImpl bdi;
+
     private final String[] genders = {"男", "女", "保密"};
 
     /**
@@ -29,6 +37,7 @@ public class ViewDirectController {
     @RequestMapping(value = "/index")
     public ModelAndView index() {
 	ModelAndView mav = new ModelAndView("index");
+
 	return mav;
     }
 
@@ -46,13 +55,13 @@ public class ViewDirectController {
      * @return
      */
     @RequestMapping(value = "/book")
-    public ModelAndView book(String bookId) {
+    public ModelAndView book(String bookId, HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
-	Book book = new Book();
-	book.setId(bookId);
-	book.setTitle("冰与火之歌");
-	book.setSummary("《冰与火之歌》主要描述了在一片虚构的中世纪世界里所发生的一系列宫廷斗争、疆场厮杀、游历冒险和魔法抗衡的故事。在内容及风格上，《冰与火之歌》是现实生活的一面镜子，人性真实的写照。写作手法上马丁运用了POV（Point-of-View，即“视点人物写作手法”），以轮流交换人物第三人称视点的叙事方式进行描写，从而推动故事的进展。");
+	Book book = bdi.findBookById(bookId);
+	ArrayList<Comment> comments = cdi.getCommentsByBookId(bookId);
 	mav.addObject("book", book);
+	request.setAttribute("comments", comments);
+	mav.addObject("comment", new Comment());
 	mav.setViewName("bookpage");
 	return mav;
     }
@@ -64,7 +73,8 @@ public class ViewDirectController {
      */
     @RequestMapping(value = {"/login"})
     public ModelAndView login() {
-	ModelAndView mav = new ModelAndView("login", "user", new User());
+	ModelAndView mav = new ModelAndView("login");
+	mav.addObject("user", new User());
 	return mav;
     }
 
@@ -81,5 +91,41 @@ public class ViewDirectController {
 	mav.addObject("genders", genders);
 	return mav;
 
+    }
+
+    @RequestMapping(value = "/addBook")
+    public ModelAndView addBook() {
+	ModelAndView mav = new ModelAndView();
+	mav.setViewName("addBook");
+	mav.addObject("book", new Book());
+	return mav;
+    }
+
+    @RequestMapping(value = "/addBookAction")
+    public ModelAndView addBookAction(Book book) {
+	ModelAndView mav = new ModelAndView("addBook");
+	mav.addObject("book", new Book());
+	book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
+	book.setCoverPath(book.getId());
+	if (bdi.insert(book)) {
+	    return mav;
+	} else {
+	    mav.setViewName("error");
+	}
+	return mav;
+    }
+
+    @RequestMapping(value = "/hello")
+    public ModelAndView hello() {
+	ModelAndView mav = new ModelAndView("hello");
+	return mav;
+    }
+
+    public void setCdi(CommentDaoImpl cdi) {
+	this.cdi = cdi;
+    }
+
+    public void setBdi(BookDaoImpl bdi) {
+	this.bdi = bdi;
     }
 }

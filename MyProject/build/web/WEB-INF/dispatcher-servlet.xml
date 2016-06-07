@@ -34,14 +34,19 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
           p:suffix=".jsp" />
 
     <!--
-    The index controller.
+        向容器注册controller
     -->
     <bean name="testController"
-          class="com.sxy.j2ee.project.controller.ViewDirectController"
-    />
+          class="com.sxy.j2ee.project.controller.ViewDirectController">
+        <property name="cdi" ref="commentDaoImpl"/>
+        <property name="bdi" ref="bookDaoImpl" />
+    </bean>
     <bean name="loginController"
           class="com.sxy.j2ee.project.controller.LoginController">
         <property name="userDaoImpl" ref="userDaoImpl" ></property>
+    </bean>
+    <bean name="commentController" class="com.sxy.j2ee.project.controller.CommentController">
+        <property name="cdi" ref="commentDaoImpl"/>
     </bean>
     <bean name="registerController"
           class="com.sxy.j2ee.project.controller.RegisterController" >
