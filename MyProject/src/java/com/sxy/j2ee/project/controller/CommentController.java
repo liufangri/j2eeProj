@@ -23,7 +23,6 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 @Controller
 public class CommentController {
-
     private CommentDaoImpl cdi;
 
     @RequestMapping(value = "/submitComment")
