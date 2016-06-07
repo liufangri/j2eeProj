@@ -6,6 +6,7 @@
 
 <%@page import="com.sxy.j2ee.project.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="mvc" %>
 <!DOCTYPE html>
 <style>
     body {
@@ -28,10 +29,10 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <form class="navbar-form navbar-left" action="#" role="search">
+            <form class="navbar-form navbar-left" action="search.htm" role="search" method="get">
                 <div class="form-group">
                     <div class="input-group">
-                        <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                        <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" name="query"/>
                         <span class="input-group-btn">
                             <button type="submit" class="btn"><span class="fui-search"></span></button>
                         </span>
