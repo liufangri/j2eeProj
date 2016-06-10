@@ -4,15 +4,38 @@
     Author     : JOHNKYON
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sxy.j2ee.project.model.Book"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+        ArrayList<Book> books = (ArrayList<Book>) request.getAttribute("books");
+    %>
+    
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <jsp:include page="header.jsp"/>
+        <title>首页</title>
+        <%
+            boolean loginState = (Boolean) session.getAttribute("login_state");
+            String path = request.getContextPath();
+        %>
     </head>
     <body>
+        <jsp:include page="staticbar.jsp" />
         ${query}
-        <h1>Hello World!</h1>
+        <%
+            for (Book b: books){
+        %>
+        <a href="book.htm?bookId=<%=b.getId()%>" class="btn btn-large btn-block btn-primary"><%=b.getTitle()%></a>
+        
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="col-sm-2"><p class="text-primary"><%= b.getSummary()%></p></div>
+            </div>
+        </div>
+        <%
+            }
+        %>
     </body>
 </html>
