@@ -57,9 +57,11 @@ public class ViewDirectController {
     @RequestMapping(value = "/book")
     public ModelAndView book(String bookId, HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
+        if(bookId == "")
+            bookId = request.getParameter(bookId);
 	Book book = bdi.findBookById(bookId);
 	ArrayList<Comment> comments = cdi.getCommentsByBookId(bookId);
-	mav.addObject("book", book);
+	request.setAttribute("book", book);
 	request.setAttribute("comments", comments);
 	mav.addObject("comment", new Comment());
 	mav.setViewName("bookpage");
@@ -123,9 +125,12 @@ public class ViewDirectController {
     
     @RequestMapping(value = "/search")
     public ModelAndView search(HttpServletRequest request)  {
-        ModelAndView mav = new ModelAndView("searchResult");
+        ModelAndView mav = new ModelAndView();
         String query = request.getParameter("query");
+        ArrayList<Book> books = bdi.findBooksByTitle(query);
+        request.setAttribute("books", books);
         mav.addObject("query", query);
+        mav.setViewName("searchResult");
         return mav;
     }
 
