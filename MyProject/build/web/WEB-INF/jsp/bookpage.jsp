@@ -75,8 +75,6 @@
                     <a href="login.htm">登录后进行评论</a>
                     <%}%>
                 </div>
-
-
             </div>
         </div>
     </body>

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class BookDaoImpl implements BookDao {
 	    ResultSet rs = ps.executeQuery();
 	    if (rs.next()) {
 		book = new Book();
-		book.setId(rs.getString("title"));
+		book.setId(rs.getString("id"));
 		book.setAuthor(rs.getString("author"));
 		book.setPublishDate(rs.getDate("publishDate"));
 		book.setTitle(rs.getString("title"));
@@ -118,4 +119,31 @@ public class BookDaoImpl implements BookDao {
 	this.dbcpBean = dbcpBean;
     }
 
+    public ArrayList<Book> getBooksForIndex() {
+	Connection connection = dbcpBean.getConnection();
+	ArrayList<Book> books = null;
+	String sql = "select * from book limit 0, 10";
+	try {
+	    PreparedStatement ps = connection.prepareStatement(sql);
+	    ResultSet rs;
+	    rs = ps.executeQuery();
+	    books = new ArrayList<Book>();
+	    while (rs.next()) {
+		Book b = new Book();
+		b.setId(rs.getString("id"));
+		b.setAuthor(rs.getString("author"));
+		b.setTitle(rs.getString("title"));
+		b.setCoverPath(rs.getString("coverPath"));
+		b.setPublishDate(rs.getDate("publishDate"));
+		b.setSummary(rs.getString("summary"));
+		books.add(b);
+	    }
+	} catch (SQLException ex) {
+	    Logger.getLogger(BookDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+	} finally {
+	    dbcpBean.shutDownDataSource();
+	    return books;
+	}
+
+    }
 }

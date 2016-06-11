@@ -50,4 +50,5 @@ public class CommentController {
     public void setCdi(CommentDaoImpl cdi) {
 	this.cdi = cdi;
     }
+
 }

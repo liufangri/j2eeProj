@@ -11,10 +11,13 @@ import com.sxy.j2ee.project.model.Comment;
 import com.sxy.j2ee.project.model.CommentDaoImpl;
 import com.sxy.j2ee.project.model.User;
 import com.sxy.j2ee.project.security.Md5;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -35,9 +38,10 @@ public class ViewDirectController {
      * @return
      */
     @RequestMapping(value = "/index")
-    public ModelAndView index() {
+    public ModelAndView index(HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView("index");
-
+	ArrayList<Book> books = bdi.getBooksForIndex();
+	request.setAttribute("books", books);
 	return mav;
     }
 
@@ -59,6 +63,7 @@ public class ViewDirectController {
 	ModelAndView mav = new ModelAndView();
 	Book book = bdi.findBookById(bookId);
 	ArrayList<Comment> comments = cdi.getCommentsByBookId(bookId);
+
 	mav.addObject("book", book);
 	request.setAttribute("comments", comments);
 	mav.addObject("comment", new Comment());
@@ -102,11 +107,27 @@ public class ViewDirectController {
     }
 
     @RequestMapping(value = "/addBookAction")
-    public ModelAndView addBookAction(Book book) {
+    public ModelAndView addBookAction(Book book, HttpServletRequest request, MultipartFile coverImg) throws IOException {
 	ModelAndView mav = new ModelAndView("addBook");
 	mav.addObject("book", new Book());
 	book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
-	book.setCoverPath(book.getId());
+	String path = request.getSession().getServletContext().getRealPath("/dist");
+	String coverPath = path + "\\img\\bookcovers";
+	String fileName = coverImg.getOriginalFilename();
+	String[] nameparts = fileName.split("\\.");
+	if (nameparts.length <= 0) {
+	    fileName = book.getId();
+	} else {
+	    fileName = book.getId() + "." + nameparts[nameparts.length - 1];
+	}
+	File file = new File(coverPath, fileName);
+
+	if (!file.exists()) {
+	    file.mkdirs();
+	}
+	coverImg.transferTo(file);
+
+	book.setCoverPath(file.getAbsolutePath());
 	if (bdi.insert(book)) {
 	    return mav;
 	} else {
