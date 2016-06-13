@@ -25,9 +25,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="about.htm">About</a></li>
+                <li><a href="contact.htm">Contact</a></li>
             </ul>
             <form class="navbar-form navbar-left" action="search.htm" role="search" method="get">
                 <div class="form-group">

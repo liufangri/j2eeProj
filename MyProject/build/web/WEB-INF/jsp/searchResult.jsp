@@ -15,7 +15,7 @@
     
     <head>
         <jsp:include page="header.jsp"/>
-        <title>首页</title>
+        <title>搜索结果</title>
         <%
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();

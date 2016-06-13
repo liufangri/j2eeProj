@@ -169,6 +169,18 @@ public class ViewDirectController {
         mav.setViewName("searchResult");
         return mav;
     }
+    
+    @RequestMapping(value = "/contact")
+    public ModelAndView contact(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("contact");
+        return mav;
+    }
+    
+    @RequestMapping(value = "about")
+    public ModelAndView about(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("about");
+        return mav;
+    }
 
     public void setCdi(CommentDaoImpl cdi) {
 	this.cdi = cdi;
