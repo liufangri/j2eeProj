@@ -6,6 +6,7 @@
 package com.sxy.j2ee.project.model;
 
 import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Book {
     private Date publishDate;
     private String coverPath;
     private String[] tags;
+    private MultipartFile coverImg;
 
     public String getTitle() {
 	return title;
@@ -77,4 +79,11 @@ public class Book {
 	this.tags = tags;
     }
 
+    public MultipartFile getCoverImg() {
+	return coverImg;
+    }
+
+    public void setCoverImg(MultipartFile coverImg) {
+	this.coverImg = coverImg;
+    }
 }

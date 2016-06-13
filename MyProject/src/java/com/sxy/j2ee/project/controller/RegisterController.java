@@ -5,12 +5,16 @@
  */
 package com.sxy.j2ee.project.controller;
 
+import com.sxy.j2ee.project.model.Book;
+import com.sxy.j2ee.project.model.BookDaoImpl;
 import com.sxy.j2ee.project.model.User;
 import com.sxy.j2ee.project.model.UserDaoImpl;
 import com.sxy.j2ee.project.security.Md5;
 import com.sxy.j2ee.project.util.MyModelAndView;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegisterController {
 
     private UserDaoImpl userDaoImpl;
+    private BookDaoImpl bdi;
     private final String[] genders = {"男", "女", "保密"};
     private final String error_name = "error_name";
     private final String error_email = "error_email";
@@ -39,7 +44,7 @@ public class RegisterController {
      * @return
      */
     @RequestMapping(value = "/registerAction")
-    public ModelAndView validation(User user) {
+    public ModelAndView validation(User user, HttpServletRequest request) {
 	MyModelAndView mav = new MyModelAndView();
 	String name = user.getName();
 	if (name == null || name == "") {
@@ -104,7 +109,9 @@ public class RegisterController {
 
 	    if (userDaoImpl.insert(user)) {
 		mav.addObject("result", user);
-		mav.setViewName("test");
+		ArrayList<Book> books = bdi.getBooksForIndex();
+		request.setAttribute("books", books);
+		mav.setViewName("index");
 		return mav;
 	    } else {
 		mav.setViewName("error");
@@ -120,6 +127,10 @@ public class RegisterController {
 
     public void setUserDaoImpl(UserDaoImpl userDaoImpl) {
 	this.userDaoImpl = userDaoImpl;
+    }
+
+    public void setBdi(BookDaoImpl bdi) {
+	this.bdi = bdi;
     }
 
 }
