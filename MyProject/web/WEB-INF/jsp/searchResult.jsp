@@ -23,7 +23,7 @@
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
-        ${query}
+        <p><strong>${query}</strong> 的搜索结果是 </p>
         <%
             for (Book b: books){
         %>
