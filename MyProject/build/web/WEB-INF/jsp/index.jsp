@@ -1,3 +1,5 @@
+<%@page import="com.sxy.j2ee.project.model.Book"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.sxy.j2ee.project.model.Comment"%>
@@ -13,6 +15,8 @@
         <%
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
+            ArrayList<Book> books = (ArrayList<Book>) request.getAttribute("books");
+
         %>
     </head>
     <body>
@@ -20,27 +24,25 @@
         <div class="container">
             <div class="col-md-12">
                 <div class="row">
+
+                    <%	
+                        for (Book b : books) {
+                    %>
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail" style="min-height: 340px">
-                            <a href="#"><img src="<%=path%>/dist/img/bookcovers/631BCEF55B51E2B6.jpg" alt="{}" width="150px" height="300px"/></a>
+                            <a href="book.htm?bookId=<%=b.getId()%>"><img src="<%=path%>/dist/img/bookcovers/<%= b.getId()%>.jpg" alt="暂无封面" width="150px" height="300px"/></a>
                             <div class="caption">
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=631BCEF55B51E2B6">View</a></p>
+                                <h3 ><%= b.getTitle()%></h3>
+                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=<%= b.getId()%>">View</a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail" style="min-height: 300px">
-                            <a href="#" style=""><img src="<%=path%>/dist/img/bookcovers/3FD33040AEB091BE.jpg" alt="{}" height="100%"/></a>
-                            <div class="caption" >
-                                <h3>${book.title}</h3>
-                                <p>${book.summary}</p>
-                                <p><a role="button" class="btn btn-primary" href="book.htm?bookId=3FD33040AEB091BE">View</a></p>
-                            </div>
-                        </div>
-                    </div>
-                                
+
+                    <%
+                        }
+                    %>
+
+
                 </div>
             </div>
 

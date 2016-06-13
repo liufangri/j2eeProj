@@ -5,9 +5,12 @@
  */
 package com.sxy.j2ee.project.controller;
 
+import com.sxy.j2ee.project.model.Book;
+import com.sxy.j2ee.project.model.BookDaoImpl;
 import com.sxy.j2ee.project.model.User;
 import com.sxy.j2ee.project.model.UserDaoImpl;
 import com.sxy.j2ee.project.security.Md5;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     private UserDaoImpl userDaoImpl;
+    private BookDaoImpl bdi;
+
     private final String error_email = "error_email";
     private final String error_password = "error_password";
     private final String error = "has-error";
@@ -65,6 +70,8 @@ public class LoginController {
 		//密码验证成功
 		request.getRequestURI();
 		mav.setViewName("index");
+		ArrayList<Book> books = bdi.getBooksForIndex();
+		request.setAttribute("books", books);
 		session.setAttribute("user", queryUser);
 		session.setAttribute("login_state", true);
 		return mav;
@@ -86,5 +93,9 @@ public class LoginController {
     public ModelAndView logout(HttpSession session) {
 	session.setAttribute("login_state", false);
 	return new ModelAndView("index");
+    }
+
+    public void setBdi(BookDaoImpl bdi) {
+	this.bdi = bdi;
     }
 }
