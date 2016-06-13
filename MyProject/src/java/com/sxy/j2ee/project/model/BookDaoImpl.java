@@ -56,17 +56,17 @@ public class BookDaoImpl implements BookDao {
 	PreparedStatement ps;
 	try {
 	    ps = connection.prepareStatement(sql);
-	    ps.setString(1, "%"+title+"%");
+	    ps.setString(1, "%" + title + "%");
 	    ResultSet rs = ps.executeQuery();
 	    while (rs.next()) {
 		Book book = new Book();
-		book.setId(rs.getString("title"));
+		book.setId(rs.getString("id"));
 		book.setAuthor(rs.getString("author"));
 		book.setPublishDate(rs.getDate("publishDate"));
 		book.setTitle(rs.getString("title"));
 		book.setCoverPath(rs.getString("coverPath"));
 		book.setSummary(rs.getString("summary"));
-                books.add(book);
+		books.add(book);
 	    }
 	} catch (SQLException ex) {
 	    Logger.getLogger(BookDaoImpl.class.getName()).log(Level.SEVERE, null, ex);

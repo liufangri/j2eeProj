@@ -1,0 +1,5 @@
+MyProject/nbproject/private/private.properties
+MyProject/nbproject/project.properties
+MyProject/nbproject/ant-deploy.xml
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/model/BookDaoImpl.class
+*.class
