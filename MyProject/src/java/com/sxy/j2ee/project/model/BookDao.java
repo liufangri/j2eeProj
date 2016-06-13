@@ -5,6 +5,8 @@
  */
 package com.sxy.j2ee.project.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Y400
@@ -13,7 +15,7 @@ public interface BookDao {
 
     public Book findBookById(String id);
 
-    public Book findBookByTitle(String title);
+    public ArrayList<Book> findBooksByTitle(String title);
 
     public Book findBookByAuthor(String author);
 

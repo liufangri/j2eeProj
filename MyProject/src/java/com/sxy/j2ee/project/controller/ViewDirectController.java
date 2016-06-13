@@ -11,6 +11,7 @@ import com.sxy.j2ee.project.model.Comment;
 import com.sxy.j2ee.project.model.CommentDaoImpl;
 import com.sxy.j2ee.project.model.User;
 import com.sxy.j2ee.project.security.Md5;
+import com.sxy.j2ee.project.util.MyModelAndView;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ViewDirectController {
 
     private CommentDaoImpl cdi;
     private BookDaoImpl bdi;
-
+    private final String error = "has-error";
     private final String[] genders = {"男", "女", "保密"};
 
     /**
@@ -61,10 +62,12 @@ public class ViewDirectController {
     @RequestMapping(value = "/book")
     public ModelAndView book(String bookId, HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
+	if (bookId == "") {
+	    bookId = request.getParameter(bookId);
+	}
 	Book book = bdi.findBookById(bookId);
 	ArrayList<Comment> comments = cdi.getCommentsByBookId(bookId);
-
-	mav.addObject("book", book);
+	request.setAttribute("book", book);
 	request.setAttribute("comments", comments);
 	mav.addObject("comment", new Comment());
 	mav.setViewName("bookpage");
@@ -108,30 +111,42 @@ public class ViewDirectController {
 
     @RequestMapping(value = "/addBookAction")
     public ModelAndView addBookAction(Book book, HttpServletRequest request, MultipartFile coverImg) throws IOException {
-	ModelAndView mav = new ModelAndView("addBook");
-	mav.addObject("book", new Book());
-	book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
-	String path = request.getSession().getServletContext().getRealPath("/dist");
-	String coverPath = path + "\\img\\bookcovers";
-	String fileName = coverImg.getOriginalFilename();
-	String[] nameparts = fileName.split("\\.");
-	if (nameparts.length <= 0) {
-	    fileName = book.getId();
-	} else {
-	    fileName = book.getId() + "." + nameparts[nameparts.length - 1];
-	}
-	File file = new File(coverPath, fileName);
+	MyModelAndView mav = new MyModelAndView("addBook");
+	mav.addObject("book", book);
+	String title = book.getTitle();
+	String author = book.getAuthor();
+	if (title == null || title.equals("")) {
+	    mav.addObject("title_has_error", error);
+	    mav.addObject("error_title", "title不能为空");
+	} else if (author == null || author.equals("")) {
+	    mav.addObject("author_has_error", error);
+	    mav.addObject("error_author", "author不能为空");
 
-	if (!file.exists()) {
-	    file.mkdirs();
-	}
-	coverImg.transferTo(file);
-
-	book.setCoverPath(file.getAbsolutePath());
-	if (bdi.insert(book)) {
-	    return mav;
 	} else {
-	    mav.setViewName("error");
+
+	    book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
+	    String path = request.getSession().getServletContext().getRealPath("/dist");
+	    String coverPath = path + "\\img\\bookcovers";
+	    String fileName = coverImg.getOriginalFilename();
+	    String[] nameparts = fileName.split("\\.");
+	    if (nameparts.length <= 0) {
+		fileName = book.getId();
+	    } else {
+		fileName = book.getId() + "." + nameparts[nameparts.length - 1];
+	    }
+	    File file = new File(coverPath, fileName);
+
+	    if (!file.exists()) {
+		file.mkdirs();
+	    }
+	    coverImg.transferTo(file);
+
+	    book.setCoverPath(file.getAbsolutePath());
+	    if (bdi.insert(book)) {
+		return mav;
+	    } else {
+		mav.setViewName("error");
+	    }
 	}
 	return mav;
     }
@@ -139,6 +154,17 @@ public class ViewDirectController {
     @RequestMapping(value = "/hello")
     public ModelAndView hello() {
 	ModelAndView mav = new ModelAndView("hello");
+	return mav;
+    }
+
+    @RequestMapping(value = "/search")
+    public ModelAndView search(HttpServletRequest request) {
+	ModelAndView mav = new ModelAndView();
+	String query = request.getParameter("query");
+	ArrayList<Book> books = bdi.findBooksByTitle(query);
+	request.setAttribute("books", books);
+	mav.addObject("query", query);
+	mav.setViewName("searchResult");
 	return mav;
     }
 

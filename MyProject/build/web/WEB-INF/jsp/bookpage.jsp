@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" class="img-rounded" alt="..." width="150px"/>
+                        <img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" class="img-rounded" alt="暂无封面" width="150px"/>
                     </div>
                 </div>
                 <%
@@ -75,6 +75,8 @@
                     <a href="login.htm">登录后进行评论</a>
                     <%}%>
                 </div>
+
+
             </div>
         </div>
     </body>

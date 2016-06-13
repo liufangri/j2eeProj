@@ -10,10 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="header.jsp"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <mvc:form modelAttribute="book" action="addBookAction.htm" method="post" enctype="multipart/form-data">
+        <div class="container">
+        <mvc:form modelAttribute="book" action="addBookAction.htm" method="post" enctype="multipart/form-data" cssClass="form">
             <table>
                 <tr><td><mvc:label path="title">Title</mvc:label></td><td><mvc:input path="title"/></td></tr>
                 <tr><td><mvc:label path="author">Author</mvc:label></td><td><mvc:input path="author"/></td></tr>
@@ -26,8 +28,8 @@
             <tr><td>title:</td><td>${book.title}</td></tr>
             <tr><td>author:</td><td>${book.author}</td></tr>
             <tr><td>summary:</td><td>${book.summary}</td></tr>
-            <tr><td>cover:</td><td>${book.title}</td></tr>
-            <tr><td>title:</td><td>${book.title}</td></tr>
+            <tr><td>cover:</td><td><img src=""alt="无"></td></tr>
         </table>
+        </div>
     </body>
 </html>
