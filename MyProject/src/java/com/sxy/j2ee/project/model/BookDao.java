@@ -18,6 +18,8 @@ public interface BookDao {
     public ArrayList<Book> findBooksByTitle(String title);
 
     public Book findBookByAuthor(String author);
+    
+    public ArrayList<Book> findBooksByAuthor(String title);
 
     public boolean insert(Book book);
 

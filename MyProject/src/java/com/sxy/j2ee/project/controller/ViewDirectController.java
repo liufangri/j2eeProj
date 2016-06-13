@@ -128,6 +128,8 @@ public class ViewDirectController {
         ModelAndView mav = new ModelAndView();
         String query = request.getParameter("query");
         ArrayList<Book> books = bdi.findBooksByTitle(query);
+        ArrayList<Book> books_author = bdi.findBooksByAuthor(query);
+        books.addAll(books_author);
         request.setAttribute("books", books);
         mav.addObject("query", query);
         mav.setViewName("searchResult");
