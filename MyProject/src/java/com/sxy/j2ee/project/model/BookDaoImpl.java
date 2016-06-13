@@ -119,4 +119,31 @@ public class BookDaoImpl implements BookDao {
 	this.dbcpBean = dbcpBean;
     }
 
+    public ArrayList<Book> getBooksForIndex() {
+	Connection connection = dbcpBean.getConnection();
+	ArrayList<Book> books = null;
+	String sql = "select * from book limit 0, 10";
+	try {
+	    PreparedStatement ps = connection.prepareStatement(sql);
+	    ResultSet rs;
+	    rs = ps.executeQuery();
+	    books = new ArrayList<Book>();
+	    while (rs.next()) {
+		Book b = new Book();
+		b.setId(rs.getString("id"));
+		b.setAuthor(rs.getString("author"));
+		b.setTitle(rs.getString("title"));
+		b.setCoverPath(rs.getString("coverPath"));
+		b.setPublishDate(rs.getDate("publishDate"));
+		b.setSummary(rs.getString("summary"));
+		books.add(b);
+	    }
+	} catch (SQLException ex) {
+	    Logger.getLogger(BookDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+	} finally {
+	    dbcpBean.shutDownDataSource();
+	    return books;
+	}
+
+    }
 }

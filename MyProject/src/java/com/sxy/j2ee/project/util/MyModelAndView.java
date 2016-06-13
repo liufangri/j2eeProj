@@ -15,6 +15,14 @@ public class MyModelAndView extends ModelAndView {
 
     private int numOfObjs = 0;
 
+    public MyModelAndView() {
+	super();
+    }
+
+    public MyModelAndView(String viewName) {
+	super(viewName);
+    }
+
     @Override
     public ModelAndView addObject(String attributeName, Object attributeValue) {
 	numOfObjs++;
