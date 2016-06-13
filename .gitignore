@@ -3,3 +3,11 @@ MyProject/nbproject/project.properties
 MyProject/nbproject/ant-deploy.xml
 MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/model/BookDaoImpl.class
 *.class
+*.class
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/controller/CommentController.class
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/controller/LoginController.class
+*.class
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/model/BookDaoImpl.class
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/controller/CommentController.class
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/controller/ViewDirectController.class
+MyProject/build/web/WEB-INF/classes/com/sxy/j2ee/project/model/BookDaoImpl.class

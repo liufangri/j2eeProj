@@ -72,7 +72,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
         <property name="maxInMemorySize" value="524288"/>
     </bean>
 
-    
     <context:component-scan base-package="com.sxy.j2ee.project.config"/>
     <context:annotation-config/>
     <mvc:annotation-driven/>

@@ -12,7 +12,7 @@
     <%
         ArrayList<Book> books = (ArrayList<Book>) request.getAttribute("books");
     %>
-    
+
     <head>
         <jsp:include page="header.jsp"/>
         <title>首页</title>
@@ -23,19 +23,30 @@
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
-        ${query}
-        <%
-            for (Book b: books){
+        <div class="container">
+            <%
+            if (books.size() != 0) {
         %>
-        <a href="book.htm?bookId=<%=b.getId()%>" class="btn btn-large btn-block btn-primary"><%=b.getTitle()%></a>
-        
-        <div class="row">
-            <div class="col-sm-7">
-                <div class="col-sm-2"><p class="text-primary"><%= b.getSummary()%></p></div>
+            <p>搜索"${query}"的结果：</p>
+
+            <%
+                for (Book b : books) {
+            %>
+            <a href="book.htm?bookId=<%=b.getId()%>" class="btn btn-large btn-block btn-primary"><%=b.getTitle()%></a>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11"><p class="text-primary"><%= b.getSummary()%></p></div>
+                </div>
             </div>
+            <%
+                }
+            } else {
+
+            %>
+            <p>无搜索结果！</p>
+            <%}%>
         </div>
-        <%
-            }
-        %>
     </body>
 </html>

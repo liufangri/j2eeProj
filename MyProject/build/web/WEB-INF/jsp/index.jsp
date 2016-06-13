@@ -16,40 +16,48 @@
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
             ArrayList<Book> books = (ArrayList<Book>) request.getAttribute("books");
-
         %>
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
         <div class="container">
             <div class="col-md-12">
+                <%
+                    for (int index = 0; index < books.size(); index++) {
+                        Book b = books.get(index);
+                        if (index % 3 == 0) {
+                %>   
                 <div class="row">
-
-                    <%	
-                        for (Book b : books) {
+                    <%
+                        }
                     %>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail" style="min-height: 340px">
+                    <div class="col-md-4">
+                        <div class="thumbnail" style="min-height: 400px">
                             <a href="book.htm?bookId=<%=b.getId()%>"><img src="<%=path%>/dist/img/bookcovers/<%= b.getId()%>.jpg" alt="暂无封面" width="150px" height="300px"/></a>
                             <div class="caption">
-                                <h3 ><%= b.getTitle()%></h3>
+                                <h4><%= b.getTitle()%></h4>
                                 <p><a role="button" class="btn btn-primary" href="book.htm?bookId=<%= b.getId()%>">View</a></p>
                             </div>
                         </div>
                     </div>
 
                     <%
-                        }
+                        if (index % 3 == 2) {
                     %>
-
-
                 </div>
+                <%
+                        }
+                    }
+                %>
+
+
             </div>
-
-
         </div>
-        <jsp:include page="footer.jsp"/>
-    </body>
+
+
+    </div>
+    <jsp:include page="footer.jsp"/>
+</body>
 
 
 </html>
