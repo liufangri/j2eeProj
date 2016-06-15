@@ -19,7 +19,7 @@
             <div class="tooltip-inner" style="width: 600px;"><font size=5>如有疑问请联系我们</font></div>
         </div>
         
-        <div class="demo-text-box prl">
+        <div class="demo-text-box prl" >
             <h3 class="demo-panel-title">联系方式</h3>
             <p><strong>孙晓宇</strong> liufangri_sxy@163.com</p>
             <p><strong>赵冯博</strong> zhaofengbo1321@163.com</p>

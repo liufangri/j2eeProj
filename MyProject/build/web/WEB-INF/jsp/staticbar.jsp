@@ -24,12 +24,13 @@
             <a class="navbar-brand" href="index.htm">Project Name</a>
         </div>
         <div class="navbar-collapse collapse">
+
             <ul class="nav navbar-nav">
                 <li><a href="#">Home</a></li>
                 <li><a href="about.htm">About</a></li>
                 <li><a href="contact.htm">Contact</a></li>
             </ul>
-            <form class="navbar-form navbar-left" action="search.htm" role="search" method="get">
+            <form class="navbar-form navbar-left" action="search.htm" role="search" method="post">
                 <div class="form-group">
                     <div class="input-group">
                         <input class="form-control" id="navbarInput-01" type="search" placeholder="Search" name="query"/>

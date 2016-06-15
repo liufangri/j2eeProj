@@ -29,7 +29,7 @@
         <jsp:include page="staticbar.jsp" />
         <div class="container">
             <div class="col-md-12">
-                <div class="row">
+                <div class="row" style="min-height: 300px">
                     <div class="col-sm-6 col-md-6">
                         <div class="row">
                             <div class="caption">

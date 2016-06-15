@@ -15,6 +15,9 @@ import com.sxy.j2ee.project.util.MyModelAndView;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,8 +83,9 @@ public class ViewDirectController {
      * @return
      */
     @RequestMapping(value = {"/login"})
-    public ModelAndView login() {
+    public ModelAndView login(HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView("login");
+	String preUrl = request.getQueryString();
 	mav.addObject("user", new User());
 	return mav;
     }
@@ -102,19 +106,22 @@ public class ViewDirectController {
     }
 
     @RequestMapping(value = "/addBook")
-    public ModelAndView addBook() {
+    public ModelAndView addBook(HttpServletRequest request) {
 	ModelAndView mav = new ModelAndView();
 	mav.setViewName("addBook");
 	mav.addObject("book", new Book());
+	request.setAttribute("administrators", getAdministrators());
 	return mav;
     }
 
     @RequestMapping(value = "/addBookAction")
     public ModelAndView addBookAction(Book book, HttpServletRequest request, MultipartFile coverImg) throws IOException {
 	MyModelAndView mav = new MyModelAndView("addBook");
+	request.setAttribute("administrators", getAdministrators());
 	mav.addObject("book", book);
 	String title = book.getTitle();
 	String author = book.getAuthor();
+	String summary = book.getSummary();
 	if (title == null || title.equals("")) {
 	    mav.addObject("title_has_error", error);
 	    mav.addObject("error_title", "title不能为空");
@@ -122,6 +129,9 @@ public class ViewDirectController {
 	    mav.addObject("author_has_error", error);
 	    mav.addObject("error_author", "author不能为空");
 
+	} else if (summary == null || summary.equals("")) {
+	    mav.addObject("summary_has_error", error);
+	    mav.addObject("error_summary", "summary不能为空");
 	} else {
 
 	    book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
@@ -188,5 +198,24 @@ public class ViewDirectController {
 
     public void setBdi(BookDaoImpl bdi) {
 	this.bdi = bdi;
+    }
+
+    public ArrayList<String> getAdministrators() {
+	Properties properties = new Properties();
+	ArrayList<String> administrators = new ArrayList<>();
+	try {
+	    properties.load(this.getClass().getClassLoader().getResourceAsStream("com/sxy/j2ee/project/controller/administrators.properties"));
+	    String admString = properties.getProperty("administrators");
+	    String[] ads = admString.split(";");
+	    System.out.println("");
+	    for (String ad : ads) {
+		administrators.add(ad);
+	    }
+	} catch (IOException ex) {
+	    Logger.getLogger(ViewDirectController.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (NullPointerException exception) {
+	    Logger.getLogger(ViewDirectController.class.getName()).log(Level.SEVERE, null, exception);
+	}
+	return administrators;
     }
 }
