@@ -22,6 +22,7 @@ public class Book {
     private String coverPath;
     private String[] tags;
     private MultipartFile coverImg;
+    private String briefSummary;
 
     public String getTitle() {
 	return title;
@@ -36,6 +37,11 @@ public class Book {
     }
 
     public void setSummary(String summary) {
+	if (summary.length() > 100) {
+	    setBriefSummary(summary.substring(0, 120) + "...");
+	} else {
+	    setBriefSummary(summary);
+	}
 	this.summary = summary;
     }
 
@@ -85,5 +91,13 @@ public class Book {
 
     public void setCoverImg(MultipartFile coverImg) {
 	this.coverImg = coverImg;
+    }
+
+    public String getBriefSummary() {
+	return briefSummary;
+    }
+
+    public void setBriefSummary(String briefSummary) {
+	this.briefSummary = briefSummary;
     }
 }

@@ -54,10 +54,12 @@
             </div>
         </div>
 
-
+        <jsp:include page="footer.jsp"/>
     </div>
-    <jsp:include page="footer.jsp"/>
+
 </body>
 
-
+<script>
+document.getElementById("home").setAttribute("class", "active");
+</script>
 </html>

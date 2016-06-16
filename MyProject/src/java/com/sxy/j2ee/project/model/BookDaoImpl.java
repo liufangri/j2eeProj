@@ -79,15 +79,15 @@ public class BookDaoImpl implements BookDao {
     public Book findBookByAuthor(String author) {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public ArrayList<Book> findBooksByAuthor(String title) {
+
+    public ArrayList<Book> findBooksByAuthor(String author) {
 	ArrayList<Book> books = new ArrayList<Book>();
 	Connection connection = dbcpBean.getConnection();
 	String sql = "select * from book where author LIKE ?";
 	PreparedStatement ps;
 	try {
 	    ps = connection.prepareStatement(sql);
-	    ps.setString(1, "%"+title+"%");
+	    ps.setString(1, "%" + author + "%");
 	    ResultSet rs = ps.executeQuery();
 	    while (rs.next()) {
 		Book book = new Book();
@@ -97,7 +97,7 @@ public class BookDaoImpl implements BookDao {
 		book.setTitle(rs.getString("title"));
 		book.setCoverPath(rs.getString("coverPath"));
 		book.setSummary(rs.getString("summary"));
-                books.add(book);
+		books.add(book);
 	    }
 	} catch (SQLException ex) {
 	    Logger.getLogger(BookDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,5 +171,32 @@ public class BookDaoImpl implements BookDao {
 	    return books;
 	}
 
+    }
+
+    public ArrayList<Book> search(String content) {
+	ArrayList<Book> books = new ArrayList<Book>();
+	Connection connection = dbcpBean.getConnection();
+	String sql = "select * from book where title LIKE ? or author LIKE ?";
+	PreparedStatement ps;
+	try {
+	    ps = connection.prepareStatement(sql);
+	    ps.setString(1, "%" + content + "%");
+	    ps.setString(2, "%" + content + "%");
+	    ResultSet rs = ps.executeQuery();
+	    while (rs.next()) {
+		Book book = new Book();
+		book.setId(rs.getString("id"));
+		book.setAuthor(rs.getString("author"));
+		book.setPublishDate(rs.getDate("publishDate"));
+		book.setTitle(rs.getString("title"));
+		book.setCoverPath(rs.getString("coverPath"));
+		book.setSummary(rs.getString("summary"));
+		books.add(book);
+	    }
+	} catch (SQLException ex) {
+	    Logger.getLogger(BookDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+	} finally {
+	    return books;
+	}
     }
 }

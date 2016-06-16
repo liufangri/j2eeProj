@@ -30,8 +30,10 @@
 <script src="<%=path%>/dist/js/vendor/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<%=path%>/dist/js/flat-ui.min.js"></script>
-
 <script src="<%=path%>/dist/assets/js/application.js"></script>
+<script src="<%=path%>/dist/js/jquery.base64.min.js"></script>
+<script src="<%=path%>/dist/js/jquery.base64.js"></script>
+
 <script>
     $('button:not([type="submit"])').on('click', function (e) {
         var $this = $(this);

@@ -37,11 +37,13 @@
                     <mvc:label path="summary">Summary</mvc:label><mvc:textarea cssClass="form-control" rows="6" path="summary"/>
                     <label class="control-label">${error_summary}</label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ${coverImg_has_error}">
                         <mvc:label path="coverImg">Book Cover</mvc:label><mvc:input type="file" path="coverImg" cssClass="form-control"/>    
+                        <label class="control-label">${error_coverImg}</label>
                     </div>
-                    <div class="form-group">   
+                    <div >   
                         <button type="submit" class="btn btn-primary">上传</button>
+                        
                     </div>
                 </mvc:form>
                 <p>title:${book.title}</p>

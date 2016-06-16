@@ -43,13 +43,16 @@
                         <img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" class="img-rounded" alt="暂无封面" width="150px"/>
                     </div>
                 </div>
+                <h5 class="text-primary">Comments:</h5>
+
                 <%
                     for (Comment c : comments) {
                 %>
+
                 <div class="row">
-                    <div class="col-sm-7">
-                        <div class="col-sm-2"><p class="text-primary"><%= c.getSubmitter()%></p></div>
-                        <div class="col-sm-5"><p>(  <%= df.format(new Date(c.getTime().getTime())) %>):</p></div>
+                    <div class="col-sm-8">
+                        <div class="col-sm-3"><p class="text-primary"><%= c.getSubmitter()%></p></div>
+                        <div class="col-sm-5"><p>(  <%= df.format(new Date(c.getTime().getTime()))%>)</p></div>
                     </div>
                 </div>
                 <div class="col-sm-7"><p><%= c.getContent()%></p></div>
@@ -72,7 +75,7 @@
                     <%
                     } else {
                     %>
-                    <a href="login.htm">登录后进行评论</a>
+                    <p><a href="login.htm">登录</a>后进行评论</p>
                     <%}%>
                 </div>
 

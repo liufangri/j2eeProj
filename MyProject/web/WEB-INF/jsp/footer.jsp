@@ -4,6 +4,6 @@
     Author     : Y400
 --%>
 
-<div>
-    this is footer!
+<div class="footer-title">
+    <p>Created by ZHAO Fengbo and SUN Xiaoyu</p>
 </div>

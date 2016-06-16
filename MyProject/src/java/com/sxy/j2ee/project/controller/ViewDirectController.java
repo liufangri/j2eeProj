@@ -125,37 +125,63 @@ public class ViewDirectController {
 	if (title == null || title.equals("")) {
 	    mav.addObject("title_has_error", error);
 	    mav.addObject("error_title", "title不能为空");
+	} else if (title.length() > 64) {
+	    mav.addObject("title_has_error", error);
+	    mav.addObject("error_title", "title最长64个字符");
 	} else if (author == null || author.equals("")) {
 	    mav.addObject("author_has_error", error);
 	    mav.addObject("error_author", "author不能为空");
 
+	} else if (author.length() > 64) {
+	    mav.addObject("title_has_error", error);
+	    mav.addObject("error_author", "author最长64个字符");
 	} else if (summary == null || summary.equals("")) {
 	    mav.addObject("summary_has_error", error);
 	    mav.addObject("error_summary", "summary不能为空");
+	} else if (summary.length() > 1024) {
+	    mav.addObject("summary_has_error", error);
+	    mav.addObject("error_summary", "summary最长1024个字符");
+	} else if (book.getCoverImg().getSize() == 0) {
+	    mav.addObject("coverImg_has_error", error);
+	    mav.addObject("error_coverImg", "书籍封面不能为空");
+	} else if (book.getCoverImg().getSize() > 2048576) {
+	    mav.addObject("coverImg_has_error", error);
+	    mav.addObject("error_coverImg", "封面图像最大为2MB");
 	} else {
-
-	    book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
-	    String path = request.getSession().getServletContext().getRealPath("/dist");
-	    String coverPath = path + "\\img\\bookcovers";
 	    String fileName = coverImg.getOriginalFilename();
 	    String[] nameparts = fileName.split("\\.");
-	    if (nameparts.length <= 0) {
-		fileName = book.getId();
-	    } else {
-		fileName = book.getId() + "." + nameparts[nameparts.length - 1];
-	    }
-	    File file = new File(coverPath, fileName);
+	    if (nameparts[nameparts.length - 1].equals("jpg") || nameparts[nameparts.length - 1].equals("JPG")) {
 
-	    if (!file.exists()) {
-		file.mkdirs();
-	    }
-	    coverImg.transferTo(file);
+		book.setId(Md5.Md5_16(book.getAuthor() + book.getTitle()));
+		if (bdi.findBookById(book.getId()) == null) {
+		    String path = request.getSession().getServletContext().getRealPath("/dist");
+		    String coverPath = path + "\\img\\bookcovers";
+		    if (nameparts.length <= 0) {
+			fileName = book.getId();
+		    } else {
+			fileName = book.getId() + "." + "jpg";
+		    }
+		    File file = new File(coverPath, fileName);
 
-	    book.setCoverPath(file.getAbsolutePath());
-	    if (bdi.insert(book)) {
-		return mav;
+		    if (!file.exists()) {
+			file.mkdirs();
+		    }
+		    coverImg.transferTo(file);
+
+		    book.setCoverPath(file.getAbsolutePath());
+		    if (bdi.insert(book)) {
+			return mav;
+		    } else {
+			mav.setViewName("error");
+		    }
+		} else {
+		    mav.addObject("title_has_error", error);
+		    mav.addObject("error_title", "该书已存在");
+		}
+
 	    } else {
-		mav.setViewName("error");
+		mav.addObject("coverImg_has_error", error);
+		mav.addObject("error_coverImg", "书籍封面只能为jpg格式");
 	    }
 	}
 	return mav;
@@ -168,28 +194,26 @@ public class ViewDirectController {
     }
 
     @RequestMapping(value = "/search")
-    public ModelAndView search(HttpServletRequest request)  {
-        ModelAndView mav = new ModelAndView();
-        String query = request.getParameter("query");
-        ArrayList<Book> books = bdi.findBooksByTitle(query);
-        ArrayList<Book> books_author = bdi.findBooksByAuthor(query);
-        books.addAll(books_author);
-        request.setAttribute("books", books);
-        mav.addObject("query", query);
-        mav.setViewName("searchResult");
-        return mav;
+    public ModelAndView search(HttpServletRequest request) {
+	ModelAndView mav = new ModelAndView();
+	String query = request.getParameter("query");
+	ArrayList<Book> books = bdi.search(query);
+	request.setAttribute("books", books);
+	mav.addObject("query", query);
+	mav.setViewName("searchResult");
+	return mav;
     }
-    
+
     @RequestMapping(value = "/contact")
     public ModelAndView contact(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("contact");
-        return mav;
+	ModelAndView mav = new ModelAndView("contact");
+	return mav;
     }
-    
+
     @RequestMapping(value = "about")
     public ModelAndView about(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("about");
-        return mav;
+	ModelAndView mav = new ModelAndView("about");
+	return mav;
     }
 
     public void setCdi(CommentDaoImpl cdi) {

@@ -21,14 +21,14 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="index.htm">Project Name</a>
+            <a class="navbar-brand" href="index.htm">Project <%=(String) session.getAttribute("project_name")%></a>
         </div>
         <div class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="about.htm">About</a></li>
-                <li><a href="contact.htm">Contact</a></li>
+                <li id="home"><a href="index.htm">Home</a></li>
+                <li id="about"><a href="about.htm">About</a></li>
+                <li id="contact"><a href="contact.htm">Contact</a></li>
             </ul>
             <form class="navbar-form navbar-left" action="search.htm" role="search" method="post">
                 <div class="form-group">
@@ -44,7 +44,7 @@
                 <%
                     if ((Boolean) session.getAttribute("login_state") != null && ((Boolean) session.getAttribute("login_state")).booleanValue()) {
                 %>
-                <li><a>你好，<%= ((User) session.getAttribute("user")).getName()%></a></li>
+                <li><a>您好，<%= ((User) session.getAttribute("user")).getName()%></a></li>
                 <li class="active"><a href="logout.htm" >退出登录</a></li>
                     <%} else {%>
                 <li><a href="login.htm">登录</a></li>

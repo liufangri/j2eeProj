@@ -19,25 +19,44 @@
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
         %>
+        <script type="text/javascript">
+            function MySubmit(id){
+                var form = document.getElementById(id);
+                form.submit();
+            }
+        </script>
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
 
         <div class="container">
             <%
-            if (books.size() != 0) {
-        %>
+                if (books.size() != 0) {
+            %>
             <p>搜索"${query}"的结果：</p>
 
             <%
                 for (Book b : books) {
             %>
-            <a href="book.htm?bookId=<%=b.getId()%>" class="btn btn-large btn-block btn-primary"><%=b.getTitle()%></a>
+            <div class="col-sm-12">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-11">
+                    <h5 style="width: fit-content">
+                        <a href="book.htm?bookId=<%=b.getId()%>" class="text-primary" style="width: fit-content"><%=b.getTitle()%></a>
+                        <form method="post" action="search.htm" id="<%= b.getId()%>">
+                            <input hidden="true" type="text" value="<%= b.getAuthor()%>" name="query">
+                            <input type="submit" hidden="true" />
+                            <p class="text-right">
+                                <a href="javascript:void(0);" type="submit" onclick="MySubmit('<%=b.getId()%>')">
+                                    <em><%= b.getAuthor()%></em></a>
+                            </p>
+                        </form>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-11"><p class="text-primary"><%= b.getSummary()%></p></div>
+                    </h5>
+                    <div class="row">
+                        <div class="col-sm-1"><p class="text-info">简介：</p></div>
+                        <div class="col-sm-11"><p class="text-muted"><%= b.getBriefSummary()%></p></div>
+                    </div>
                 </div>
             </div>
             <%
@@ -49,4 +68,5 @@
             <%}%>
         </div>
     </body>
+
 </html>
