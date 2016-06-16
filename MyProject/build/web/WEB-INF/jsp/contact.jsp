@@ -21,8 +21,8 @@
 
             <div class="demo-text-box prl" >
                 <h3 class="demo-panel-title">联系方式</h3>
-                <p><strong>孙晓宇</strong> <a href="liufangri_sxy@163.com" target="_blank">liufangri_sxy@163.com</a></p>
-                <p><strong>赵冯博</strong> zhaofengbo1321@163.com</p>
+                <p><strong>孙晓宇</strong> <a href="mailto:liufangri_sxy@163.com" target="_blank">liufangri_sxy@163.com</a></p>
+                <p><strong>赵冯博</strong> <a href="mailto:zhaofengbo1321@163.com" target="_blank">zhaofengbo1321@163.com</a></p>
             </div>
         </div>
     </body>
