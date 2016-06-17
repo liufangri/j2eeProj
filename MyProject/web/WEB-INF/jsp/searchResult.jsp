@@ -14,7 +14,7 @@
     %>
     <head>
         <jsp:include page="header.jsp"/>
-        <title>搜索结果</title>
+        <title><%= session.getAttribute("project_name") %> 搜索结果</title>
         <%
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
@@ -54,8 +54,8 @@
 
                     </h5>
                     <div class="row">
-                        <div class="col-sm-1"><p class="text-info">简介：</p></div>
-                        <div class="col-sm-11"><p class="text-muted"><%= b.getBriefSummary()%></p></div>
+                        <div class="col-sm-2"><p class="text-center text-info"><strong>简介：</strong></p></div>
+                        <div class="col-sm-10"><p class="text-muted"><%= b.getBriefSummary()%></p></div>
                     </div>
                 </div>
             </div>

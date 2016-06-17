@@ -9,8 +9,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+        session.setAttribute("project_name", "Project NX");
+        %>
         <jsp:include page="header.jsp"/>
-        <title>注册</title>
+        <title><%= session.getAttribute("project_name") %> 注册</title>
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />

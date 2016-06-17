@@ -61,7 +61,7 @@ public class LoginController {
 		mav.addObject(error_password, "密码不能为空");
 		mav.addObject("password_has_error", error);
 	    } else if (queryUser == null) {
-		mav.addObject(error_email, "查询不到邮箱");
+		mav.addObject(error_email, "邮箱不存在");
 		mav.addObject("email_has_error", error);
 	    } else if (!queryUser.getPwMd5().equals(Md5.Md5_16(password))) {
 		mav.addObject(error_password, "密码错误");
@@ -90,8 +90,10 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = {"/logout"})
-    public ModelAndView logout(HttpSession session) {
+    public ModelAndView logout(HttpSession session, HttpServletRequest request) {
 	session.setAttribute("login_state", false);
+	ArrayList<Book> books = bdi.getBooksForIndex();
+	request.setAttribute("books", books);
 	return new ModelAndView("index");
     }
 

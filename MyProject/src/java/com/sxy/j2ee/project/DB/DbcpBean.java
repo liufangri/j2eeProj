@@ -45,7 +45,7 @@ public class DbcpBean {
     private int maxWaitMillis;
     private int minIdle;
     private Properties prop;
-    private String DBConfig = "com/sxy/j2ee/project/DB/DbcpProperties.properties";
+    private String DBConfig = "DbcpProperties.properties";
 
     public DbcpBean() {
 	initDS();

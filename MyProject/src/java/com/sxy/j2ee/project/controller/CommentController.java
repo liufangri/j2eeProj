@@ -31,7 +31,7 @@ public class CommentController {
     public View submitComment(HttpSession session, Comment comment) {
 	User user = (User) session.getAttribute("user");
 	String content = comment.getContent();
-	if (content == null || comment.equals("")) {
+	if (content == null || content.equals("")) {
 
 	} else {
 	    comment.setSubmitter(user.getName());

@@ -10,7 +10,7 @@
 <html>
     <head>
         <jsp:include page="header.jsp"/>
-        <title>联系我们</title>
+        <title><%= session.getAttribute("project_name") %> 联系我们</title>
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
@@ -20,7 +20,6 @@
 
 
             <div class="demo-text-box prl" >
-                <h3 class="demo-panel-title">联系方式</h3>
                 <p><strong>孙晓宇</strong> <a href="mailto:liufangri_sxy@163.com" target="_blank">liufangri_sxy@163.com</a></p>
                 <p><strong>赵冯博</strong> <a href="mailto:zhaofengbo1321@163.com" target="_blank">zhaofengbo1321@163.com</a></p>
             </div>

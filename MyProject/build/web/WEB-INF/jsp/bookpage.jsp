@@ -15,7 +15,7 @@
 <html>
     <head>
         <jsp:include page="header.jsp"/>
-        <title>${book.title}</title>
+        <title><%= session.getAttribute("project_name")%> ${book.title}</title>
         <%
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
@@ -24,6 +24,17 @@
             SimpleDateFormat df = new SimpleDateFormat("MM.dd HH:mm");
             request.setAttribute("book", book);
         %>
+        <script type="text/javascript">
+            function check() {
+                var content = document.getElementById("content");
+                if (content === null || content.value === "") {
+                    alert("请输入评论内容！");
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        </script>
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
@@ -43,12 +54,14 @@
                         <img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" class="img-rounded" alt="暂无封面" width="150px"/>
                     </div>
                 </div>
-                <h5 class="text-primary">Comments:</h5>
 
-                <%
-                    for (Comment c : comments) {
+
+                <%if (comments.size() != 0) {
+
                 %>
-
+                <h5 class="text-primary">Comments:</h5>
+                <%			for (Comment c : comments) {
+                %>
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="col-sm-3"><p class="text-primary"><%= c.getSubmitter()%></p></div>
@@ -56,27 +69,28 @@
                     </div>
                 </div>
                 <div class="col-sm-7"><p><%= c.getContent()%></p></div>
-                        <%
-                            }
-                        %>
-
-
+                        <%}%>
+                        <%} else {%>
+                <h5 class="text-primary">暂无评论</h5>
+                <%}%>
                 <div class="col-sm-9">
                     <%
                         if (loginState) {
                     %>
-                    <mvc:form action="submitComment.htm" method="post" cssClass="form" modelAttribute="comment">
+                    <mvc:form action="submitComment.htm" method="post" cssClass="form" modelAttribute="comment" onsubmit="return check()">
                         <input type="text" hidden="true" name="bookId" value="${book.id}">
                         <div class="form-group">
-                            <textarea type="textarea" name="content" class="form-control"></textarea>
+                            <textarea type="textarea" name="content" class="form-control" id="content"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">comment</button>
+                        <button type="submit" class="btn btn-primary" >comment</button>
                     </mvc:form>
                     <%
                     } else {
                     %>
                     <p><a href="login.htm">登录</a>后进行评论</p>
                     <%}%>
+
+                    <label class="text-danger">${errorMessage}</label>
                 </div>
 
 

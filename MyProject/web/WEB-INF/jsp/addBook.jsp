@@ -11,11 +11,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>上传书籍</title>
+        <title><%= session.getAttribute("project_name") %> 上传书籍</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="header.jsp"/>
         <title>JSP Page</title>
         <%
+            String path = request.getContextPath();
             ArrayList<String> administrators = (ArrayList<String>)request.getAttribute("administrators");
             if((Boolean) session.getAttribute("login_state") && administrators.contains(((User)session.getAttribute("user")).getName())){
         %>
@@ -49,7 +50,7 @@
                 <p>title:${book.title}</p>
                 <p>author:${book.author}</p>
                 <p>summary:${book.summary}</p>
-                <p>cover:<img src="" alt="无"></p>
+                <p>cover:<img src="<%=path%>/dist/img/bookcovers/${book.id}.jpg" alt="无"></p>
             </div>
         </div>
     </body>

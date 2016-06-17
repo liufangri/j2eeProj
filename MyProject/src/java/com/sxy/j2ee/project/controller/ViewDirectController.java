@@ -228,7 +228,7 @@ public class ViewDirectController {
 	Properties properties = new Properties();
 	ArrayList<String> administrators = new ArrayList<>();
 	try {
-	    properties.load(this.getClass().getClassLoader().getResourceAsStream("com/sxy/j2ee/project/controller/administrators.properties"));
+	    properties.load(this.getClass().getClassLoader().getResourceAsStream("administrators.properties"));
 	    String admString = properties.getProperty("administrators");
 	    String[] ads = admString.split(";");
 	    System.out.println("");

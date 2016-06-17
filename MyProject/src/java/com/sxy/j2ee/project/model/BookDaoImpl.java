@@ -148,7 +148,7 @@ public class BookDaoImpl implements BookDao {
     public ArrayList<Book> getBooksForIndex() {
 	Connection connection = dbcpBean.getConnection();
 	ArrayList<Book> books = null;
-	String sql = "select * from book limit 0, 9";
+	String sql = "select * from book order by rand() limit 0, 9";
 	try {
 	    PreparedStatement ps = connection.prepareStatement(sql);
 	    ResultSet rs;

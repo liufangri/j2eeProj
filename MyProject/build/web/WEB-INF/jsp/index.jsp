@@ -10,13 +10,15 @@
 
 <html>
     <head>
-        <jsp:include page="header.jsp"/>
-        <title>首页</title>
         <%
+            session.setAttribute("project_name", "Project NX");
             boolean loginState = (Boolean) session.getAttribute("login_state");
             String path = request.getContextPath();
             ArrayList<Book> books = (ArrayList<Book>) request.getAttribute("books");
         %>
+        <jsp:include page="header.jsp"/>
+        <title><%= session.getAttribute("project_name") %> 首页</title>
+        
     </head>
     <body>
         <jsp:include page="staticbar.jsp" />
